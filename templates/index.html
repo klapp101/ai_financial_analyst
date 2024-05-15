@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Trends</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Stock Trends</h1>
+    <form method="POST">
+        <input type="text" name="ticker" placeholder="Enter stock ticker" value="{{ ticker }}" required>
+        <div>
+            <label><input type="checkbox" name="indicators" value="Close" {% if 'Close' in indicators %}checked{% endif %}> Close Price</label>
+            <label><input type="checkbox" name="indicators" value="Open" {% if 'Open' in indicators %}checked{% endif %}> Open Price</label>
+            <label><input type="checkbox" name="indicators" value="High" {% if 'High' in indicators %}checked{% endif %}> High Price</label>
+            <label><input type="checkbox" name="indicators" value="Low" {% if 'Low' in indicators %}checked{% endif %}> Low Price</label>
+            <label><input type="checkbox" name="indicators" value="Volume" {% if 'Volume' in indicators %}checked{% endif %}> Volume</label>
+        </div>
+        <button type="submit">Get Trend</button>
+    </form>
+    {% if plot_url %}
+        <h2>{{ ticker }} Stock Price</h2>
+        <img src="data:image/png;base64,{{ plot_url }}" alt="{{ ticker }} Stock Price">
+        
+        <h3>Financial Analysis - GPT-4o Generated</h3>
+        <div>{{ analysis|safe }}</div>
+    {% endif %}
+</body>
+</html>
