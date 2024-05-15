@@ -1,0 +1,7 @@
+openai
+matplotlib
+yfinance
+flask
+base64
+markdown2
+python-dotenv
